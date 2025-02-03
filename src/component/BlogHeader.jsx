@@ -1,23 +1,27 @@
-import React from 'react'
-import { AppWindowMac, CirclePlus } from 'lucide-react'; 
+import React from "react";
+import { AppWindowMac, CirclePlus } from "lucide-react";
 
 const BlogHeader = () => {
   return (
-    <div className="m-2 flex w-full bg-red-200">
-    <div className="gap-2 w-full p-4 text-xl  flex justify-start">
-      <AppWindowMac /> <h4 className="m-0 text-left ">BlogList</h4>
+    <div className="w-full bg-red-100 p-4">
+      <nav className="max-w-[90%] mx-auto flex items-center justify-between">
+       
+        <div className="flex items-center gap-2 text-2xl font-bold">
+          <AppWindowMac />
+          <span>BlogLists</span>
+        </div>
+
+     
+        <ul className="flex items-center gap-8 text-lg font-semibold">
+          <li className="cursor-pointer">Home</li>
+          <li className="flex items-center gap-2 cursor-pointer">
+            <CirclePlus />
+            <span>Create Post</span>
+          </li>
+        </ul>
+      </nav>
     </div>
+  );
+};
 
-    <div className="m-2 p-4 bg-red-200 flex justify-">
-  <h4 className="text-right">Home</h4>
-  </div>
-<div className="m-2 p-4 bg-red-200 flex justify-end">
-<CirclePlus /> <h4 className="text-right">AddBlog</h4>
-  
-</div>
-
-    </div>
-  )
-}
-
-export default BlogHeader
+export default BlogHeader;
