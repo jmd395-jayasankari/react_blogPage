@@ -1,5 +1,6 @@
 import React from "react";
 import { AppWindowMac, CirclePlus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const BlogHeader = () => {
   return (
@@ -13,10 +14,13 @@ const BlogHeader = () => {
 
      
         <ul className="flex items-center gap-8 text-lg font-semibold">
-          <li className="cursor-pointer">Home</li>
+        <Link to="/">
+          <li className="cursor-pointer">Home</li></Link>
           <li className="flex items-center gap-2 cursor-pointer">
             <CirclePlus />
+            <Link to="/createpost">
             <span>Create Post</span>
+            </Link>
           </li>
         </ul>
       </nav>
