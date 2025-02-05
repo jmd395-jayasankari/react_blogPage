@@ -20,15 +20,22 @@ const Home = ({ posts, deletePost, editPost }) => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="relative max-w-full mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {posts.length === 0 ? (
-        <div className="col-span-3 flex flex-col items-center">
-          <p className="text-center text-gray-500 col-span-3">No posts available. Create one!</p>
-          <img
-            src="https://c8.alamy.com/comp/RBEG4E/a-woman-is-shrugging-thinking-confused-with-a-curious-expression-i-don-t-know-a-woman-or-girl-with-a-sad-face-emotion-and-question-mark-hand-drawn-flat-style-illustration-with-cartoon-character-RBEG4E.jpg"
-            alt="No Posts"
-            className="w-90 h-90 object-cover object-top mt-4"
-          />
+        <div className="col-span-3 flex items-center justify-between">
+          {/* Message on the Left */}
+          <div className="text-left w-full md:w-1/2">
+            <p className="mx-15 text-3xl font-semibold text-black-500">No posts available. Create one!</p>
+          </div>
+
+          {/* Image on the Right */}
+          <div className="w-full md:w-1/2 flex justify-center">
+            <img
+              src="https://c8.alamy.com/comp/RBEG4E/a-woman-is-shrugging-thinking-confused-with-a-curious-expression-i-don-t-know-a-woman-or-girl-with-a-sad-face-emotion-and-question-mark-hand-drawn-flat-style-illustration-with-cartoon-character-RBEG4E.jpg"
+              alt="No Posts"
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
         </div>
       ) : (
         posts.map((post) => (
