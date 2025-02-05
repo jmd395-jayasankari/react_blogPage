@@ -5,18 +5,14 @@ import { Link } from "react-router-dom";
 const Home = ({ posts, deletePost, editPost }) => {
   const [postViews, setPostViews] = useState({});
 
-  // Load view counts from localStorage when component mounts
+  
   useEffect(() => {
     const savedViews = JSON.parse(localStorage.getItem("postViews")) || {};
     setPostViews(savedViews);
   }, []);
-
-  // Function to handle updating the view count when a post is viewed
   const handleView = (postId) => {
     setPostViews((prevViews) => {
       const newViews = { ...prevViews, [postId]: (prevViews[postId] || 0) + 1 };
-
-      // Save the updated view counts to localStorage
       localStorage.setItem("postViews", JSON.stringify(newViews));
 
       return newViews;
@@ -26,14 +22,13 @@ const Home = ({ posts, deletePost, editPost }) => {
   return (
     <div className="max-w-5xl mx-auto my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {posts.length === 0 ? (
-      <div className="col-span-3 flex flex-col items-center">
-
-        <p className="text-center text-gray-500 col-span-3">No posts available. Create one!</p>
-        <img
-  src="https://c8.alamy.com/comp/RBEG4E/a-woman-is-shrugging-thinking-confused-with-a-curious-expression-i-don-t-know-a-woman-or-girl-with-a-sad-face-emotion-and-question-mark-hand-drawn-flat-style-illustration-with-cartoon-character-RBEG4E.jpg"
-  alt="No Posts"
-  className="w-90 h-90 object-cover object-top mt-4"
-/>
+        <div className="col-span-3 flex flex-col items-center">
+          <p className="text-center text-gray-500 col-span-3">No posts available. Create one!</p>
+          <img
+            src="https://c8.alamy.com/comp/RBEG4E/a-woman-is-shrugging-thinking-confused-with-a-curious-expression-i-don-t-know-a-woman-or-girl-with-a-sad-face-emotion-and-question-mark-hand-drawn-flat-style-illustration-with-cartoon-character-RBEG4E.jpg"
+            alt="No Posts"
+            className="w-90 h-90 object-cover object-top mt-4"
+          />
         </div>
       ) : (
         posts.map((post) => (
@@ -52,7 +47,6 @@ const Home = ({ posts, deletePost, editPost }) => {
               </button>
 
               <button
-                onClick={() => handleView(post.id)} // Increment view count for the post
                 className="text-blue-500 hover:text-blue-700 flex items-center gap-1"
               >
                 <Eye size={24} />
@@ -60,19 +54,32 @@ const Home = ({ posts, deletePost, editPost }) => {
               </button>
 
               <Link
-  to={`/post/${post.id}`}
-  className="text-blue-500 hover:text-blue-700 flex items-center gap-1"
-  onClick={() => handleView(post.id)}
->
-  <BookOpenText size={24} />
-   {/* Display view count */}
-</Link>
+                to={`/post/${post.id}`}
+                className="text-blue-500 hover:text-blue-700 flex items-center gap-1"
+                onClick={() => handleView(post.id)} // Only update view count when "Read" is clicked
+              >
+                <BookOpenText size={24} />
+              </Link>
 
-              <Link to={`/edit/${post.id}`} className="text-blue-500 hover:text-blue-700 flex items-center gap-1">
-  <Pencil size={24} />
-</Link>
-
+              <Link
+                to={`/edit/${post.id}`}
+                className="text-blue-500 hover:text-blue-700 flex items-center gap-1"
+              >
+                <Pencil size={24} />
+              </Link>
             </div>
+
+            {/* Display Comments */}
+            {post.comments && post.comments.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-xl font-semibold">Comments:</h3>
+                <ul>
+                  {post.comments.map((comment, index) => (
+                    <li key={index} className="text-gray-700 mt-2">{comment}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))
       )}

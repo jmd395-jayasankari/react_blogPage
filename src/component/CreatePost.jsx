@@ -54,7 +54,7 @@ const CreatePost = ({ addPost }) => {
         <textarea
           value={title3}
           onChange={(e) => setTitle3(e.target.value)}
-          className="p-3 border border-gray-300 rounded-md w-full"
+          className="p-3 border border-gray-300 rounded-md w-full h-30"
           placeholder="Blog content"
         />
         <input
